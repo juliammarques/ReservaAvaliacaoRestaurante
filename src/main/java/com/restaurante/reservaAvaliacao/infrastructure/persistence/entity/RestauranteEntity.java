@@ -1,12 +1,14 @@
 package com.restaurante.reservaAvaliacao.infrastructure.persistence.entity;
 import java.time.LocalDate;
-import java.util.List;
 
 import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,11 +31,16 @@ public class RestauranteEntity {
 	private LocalDate dataCadastro;
 	
 	@NotBlank
-	private List<QuantitativoMesaEntity> mesasDisponiveis;
+	private String endereco;
+	
+	@NotBlank
+	private String tipoCozinha;
+	
 	
 
 	public static RestauranteEntity of(Restaurante restaurante) {
-		return new RestauranteEntity(restaurante.getSeqRestaurante(),restaurante.getNomeRestaurante(),restaurante.getDataCadastro(), QuantitativoMesaEntity.list(restaurante.getMesasDisponiveis()));
+		return new RestauranteEntity(restaurante.getSeqRestaurante(),restaurante.getNomeRestaurante(),restaurante.getDataCadastro(),
+			restaurante.getEndereco(), restaurante.getTipoCozinha());
 		
 	}
 	

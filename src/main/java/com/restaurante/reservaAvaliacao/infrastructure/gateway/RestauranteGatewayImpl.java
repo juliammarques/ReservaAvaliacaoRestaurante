@@ -1,5 +1,6 @@
 package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
@@ -16,7 +17,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
 	
 	@Override
 	public void createRestaurante(Restaurante restaurante) {
-		
+		restaurante.setDataCadastro(LocalDate.now());
 		repository.save(RestauranteEntity.of(restaurante));
 	}
 	

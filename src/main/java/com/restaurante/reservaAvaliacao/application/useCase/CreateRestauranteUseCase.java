@@ -1,5 +1,6 @@
 package com.restaurante.reservaAvaliacao.application.useCase;
 
+import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 import com.restaurante.reservaAvaliacao.domain.service.RestauranteDomainService;
 
 import lombok.NonNull;
@@ -12,10 +13,10 @@ public class CreateRestauranteUseCase {
 	private final RestauranteDomainService service;
 	
 	public void execute (Input input) {
-		service.registraRestaurante(null);
+		service.registraRestaurante(new Restaurante(input.nomeRestaurante,input.tipoCozinha, input.endereco));
 	}
 	
-	public record Input(String nomeRestaurante) {
+	public record Input(String nomeRestaurante, String tipoCozinha, String endereco) {
 		
 	}
 }
