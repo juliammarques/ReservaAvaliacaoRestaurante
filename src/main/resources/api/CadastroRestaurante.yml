@@ -1,0 +1,11 @@
+openapi: "3.0.3"
+info:
+  title: CadastroRestaurante
+  version: "1.0"
+  description: API de cadastro Restaurante
+servers:
+  - url: http://localhost:8080
+    description: Local server
+tags:
+  - name: Restaurante Api
+    description: Operacoes de cadastro e busca de restaurantes
