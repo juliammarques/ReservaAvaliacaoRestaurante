@@ -12,5 +12,5 @@ public class QuantitativoMesa {
 	private Long seqRestaurante;
 	private Long tamanhoMesa;
 	private Long  quantidadeDisponivel;
-	private String indDisponivel;
+	//private String indDisponivel;
 }

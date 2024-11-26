@@ -22,11 +22,15 @@ public class ReservaMesaEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seqReservaMesa;
-	
 	@NotNull
 	private LocalDate dataReserva;
 	@NotNull
 	private Long seqRestaurante;
+	@NotNull
+	private String nomeCliente;
+	@NotNull
+	private String documentoCliente;
+	
 	
 	
 	

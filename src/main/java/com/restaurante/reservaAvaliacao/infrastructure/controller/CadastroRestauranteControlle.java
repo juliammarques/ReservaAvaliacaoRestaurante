@@ -6,6 +6,6 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class CadastroRestauranteController {
+public class CadastroRestauranteControlle    {
 
 }
