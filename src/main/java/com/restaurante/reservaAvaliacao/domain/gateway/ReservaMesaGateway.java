@@ -11,7 +11,7 @@ public interface ReservaMesaGateway {
 
 	void updateReserva(ReservaMesa restaurante);
 
-	List<ReservaMesaEntity> buscaReservaMesaPorCliente(String documento);
+	List<ReservaMesa> buscaReservaMesaPorCliente(String documento);
 
 	void createReservaMesa(ReservaMesa ReservaMesa);
 

@@ -2,8 +2,6 @@ package com.restaurante.reservaAvaliacao.infrastructure.persistence.entity;
 
 import java.time.LocalDate;
 
-import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,28 +13,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="ReservaMesa")
+@Table(name="AvaliacaoRestauranteEntity")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ReservaMesaEntity {
+public class AvaliacaoRestauranteEntity {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long seqReservaMesa;
+	private Long seqAvaliacao;
 	@NotNull
-	private LocalDate dataReserva;
+	private LocalDate dataAvaliacao;
 	@NotNull
-	private Long seqRestaurante;
+	private Long notaAvaliacao;
 	@NotNull
-	private String nomeCliente;
-	@NotNull
-	private String documentoCliente;
-	
-	
-	public static ReservaMesaEntity of(ReservaMesa reserva ) {
-		return new ReservaMesaEntity(reserva.getSeqReservaMesa(), reserva.getDataReserva(), reserva.getSeqRestaurante(), reserva.getNomeCliente(), reserva.getDocumentoCliente());
-	}
-	
-	
+	private String comentario;
 }

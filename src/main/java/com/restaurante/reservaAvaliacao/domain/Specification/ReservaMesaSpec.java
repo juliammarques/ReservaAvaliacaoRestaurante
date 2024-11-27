@@ -9,7 +9,7 @@ import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.Reserv
 
 public class ReservaMesaSpec {
 
-	public static Specification<List<ReservaMesaEntity>> buscaPorDocumentoCliente(String documento){
+	public static Specification<ReservaMesaEntity> buscaPorDocumentoCliente(String documento){
 		return (root,query,cb) -> cb.and(cb.equal(root.get("documentoCliente"), documento));
 	}
 }

@@ -2,6 +2,8 @@ package com.restaurante.reservaAvaliacao.domain.entity;
 
 import java.time.LocalDate;
 
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,4 +22,10 @@ public class ReservaMesa {
 	private String nomeCliente;
 	
 	private String documentoCliente;
+	
+	public ReservaMesa to(ReservaMesaEntity entity) {
+		return new ReservaMesa(entity.getSeqReservaMesa(), entity.getDataReserva(), entity.getSeqRestaurante(),
+				entity.getNomeCliente(),entity.getDocumentoCliente());
+		
+	}
 }
