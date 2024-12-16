@@ -1,8 +1,9 @@
 package com.restaurante.reservaAvaliacao.domain.gateway;
 
-import java.util.List;
+import java.util.Optional;
 
 import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
+import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 
 public interface RestauranteGateway {
 
@@ -10,8 +11,10 @@ public interface RestauranteGateway {
 
 	void updateRestaurante(Restaurante restaurante);
 
-	List<Restaurante> buscaListaRestaurante();
+    Pagination<Restaurante> findAll(int page, int size);
 
 	void deleteRestaurante(Long idRestaurante);
+
+	Optional<Restaurante> getRestauranteById(Long parquimetroId);
 
 }

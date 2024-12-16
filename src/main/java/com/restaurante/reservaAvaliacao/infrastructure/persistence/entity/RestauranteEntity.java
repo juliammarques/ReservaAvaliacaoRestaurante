@@ -43,7 +43,9 @@ public class RestauranteEntity {
 			restaurante.getEndereco(), restaurante.getTipoCozinha());
 		
 	}
-	
+	public Restaurante toRestaurante() {
+        return Restaurante.with(this.nomeRestaurante, this.endereco, this.tipoCozinha);
+    }
 	
 	
 	

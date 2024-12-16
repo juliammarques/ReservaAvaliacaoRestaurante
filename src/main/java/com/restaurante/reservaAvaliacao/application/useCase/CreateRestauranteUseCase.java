@@ -17,6 +17,16 @@ public class CreateRestauranteUseCase {
 	}
 	
 	public record Input(String nomeRestaurante, String tipoCozinha, String endereco) {
-		
 	}
+	
+
+    public record Output(String nomeRestaurante, String tipoCozinha, String endereco) {
+
+        public static Output from(Restaurante restaurante) {
+            return new Output(
+            		restaurante.getNomeRestaurante(),
+            		restaurante.getTipoCozinha(),
+            		restaurante.getEndereco());
+        }
+    }
 }

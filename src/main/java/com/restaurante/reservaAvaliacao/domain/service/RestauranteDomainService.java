@@ -1,9 +1,9 @@
 package com.restaurante.reservaAvaliacao.domain.service;
 
-import java.util.List;
-
 import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
+import com.restaurante.reservaAvaliacao.domain.exception.RestauranteNaoExiste;
 import com.restaurante.reservaAvaliacao.domain.gateway.RestauranteGateway;
+import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,8 @@ public class RestauranteDomainService {
 	}
 	
 	public void atualizaRestaurante (Restaurante restaurante) {
+		gateway.getRestauranteById(restaurante.getSeqRestaurante())
+				.orElseThrow(()->new RestauranteNaoExiste(restaurante.getSeqRestaurante()));
 		gateway.updateRestaurante(restaurante);
 	}
 	
@@ -26,7 +28,7 @@ public class RestauranteDomainService {
 		gateway.deleteRestaurante(idRestaurante);
 	}
 	
-	public List<Restaurante> buscaRestaurante(){
-		return gateway.buscaListaRestaurante();	
+	public Pagination<Restaurante> buscaRestaurante(int page, int size){
+		return gateway.findAll(page, size);
 	}
 }
