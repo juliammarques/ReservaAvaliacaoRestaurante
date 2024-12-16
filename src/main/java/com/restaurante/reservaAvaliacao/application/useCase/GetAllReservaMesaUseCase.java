@@ -6,7 +6,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class GetReservaMesaUseCase {
+public class GetAllReservaMesaUseCase {
+
 
 	@NonNull
 	private final ReservaMesaDomainService service;
