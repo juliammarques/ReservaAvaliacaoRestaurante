@@ -30,7 +30,7 @@ public class QuantitativoMesaEntity {
 	private Long seqRestaurante;
 	
 	@NotBlank
-	private Long tamanhoMesa;
+	private String tamanhoMesa;
 	
 	@NotBlank
 	private Long  quantidadeDisponivel;
@@ -47,5 +47,9 @@ public class QuantitativoMesaEntity {
 				quantitativoMesa.forEach(x -> quantitativoEntity.add(of(x)));
 		return quantitativoEntity;
 	}
+	
+	public QuantitativoMesa toQuantitativo() {
+        return QuantitativoMesa.with(this.seqQuantitativoMesaEntity, this.seqRestaurante, this.tamanhoMesa, this.quantidadeDisponivel);
+    }
 	
 }

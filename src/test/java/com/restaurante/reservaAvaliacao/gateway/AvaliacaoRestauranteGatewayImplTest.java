@@ -1,21 +1,23 @@
 package com.restaurante.reservaAvaliacao.gateway;
 
-import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
-import com.restaurante.reservaAvaliacao.infrastructure.gateway.AvaliacaoRestauranteGatewayImpl;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.AvaliacaoRestauranteEntity;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IAvaliacaoRestauranteRepository;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
+import com.restaurante.reservaAvaliacao.infrastructure.gateway.AvaliacaoRestauranteGatewayImpl;
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.AvaliacaoRestauranteEntity;
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IAvaliacaoRestauranteRepository;
 
 class AvaliacaoRestauranteGatewayImplTest {
 
