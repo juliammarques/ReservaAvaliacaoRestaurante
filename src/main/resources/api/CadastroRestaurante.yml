@@ -34,7 +34,7 @@ paths:
              description: Bad request
            "422":
              description: Unprocessable entity
-/listaAvaliacoes/{seqRestaurante}:
+/avaliacaoRestaurante/{seqRestaurante}:
    get:
     tags:
      -AvaliacaoRestaurante
@@ -75,4 +75,155 @@ paths:
         application/json:
          schema:
            $ref: "#/components/schemas/AvaliacaoRestaurantePaginado"
+/CadastroRestaurante:
+       post:
+         tags:
+            - CadastroRestaurante
+         summary: Cadastra Restaurante
+         description: Cadastra um novo restaurante
+         operationId: criarRestaurante
+         requestBody:
+          required: true
+          content:
+           application/json:
+             schema:
+              $ref: "#/components/schemas/CreateRestaurante"
+         responses:
+          "200":
+            description: OK
+          "400":
+            description: Bad request
+          "422":
+            description: Unprocessable entity
+       put:
+        tags:
+          - CadastroRestaurante
+        summary: Atualiza restaurante 
+        description: atualizaRestaurante
+        operationId: atualizaRestaurantePeloId
+        parameters:
+         - name: id
+           in: path
+           required: true
+           schema:
+             type: integer
+             format: int64
+             example: 1
+           description: seq Restaurante
+        requestBody:
+          required: true
+          content:
+            application/json:
+             schema:
+               $ref: "#/components/schemas/UpdateRestaurante"
+        responses:
+          "200":
+           description: OK
+          "400":
+            description: Bad request
+          "404":
+             description: Not found"
+          "422":
+             description: Unprocessable entity
+        get:
+         tags:
+          -CadastroRestaurante
+         summary: Listar Restaurantes
+         description: Listar restaurante
+         operationId: listaRestaurantes
+         parameters:
+          - name: page
+            in: query 
+            required: false
+            schema:
+              type: integer
+              format: int32
+              default: 0
+              example: 0
+            description: numero pagina
+          - name: size
+            in: query
+            required: false
+            schema:
+              type: integer
+              format: int32
+              default: 10
+              example: 10
+            description: Tamanho da página
+         responses:
+           "200":
+           description: OK
+           content:
+             application/json:
+              schema:
+               $ref: "#/components/schemas/ListarRestaurantePaginado"
+        post:
+          tags:
+           - CadastroRestaurante
+          summary: Criar Quantitativo mesa disponivel
+          description: Adiciona as mesas disponiveis para reserva
+          operationId: criarQuantitativoMesaDisponivel
+          requestBody:
+            required: true
+            content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/CreateQuantitativo"
+          responses:
+            "200":
+              description: OK
+            "400":
+              description: Bad request
+            "422":
+              description: Unprocessable entity
+        put:
+         tags:
+          - CadastroRestaurante
+         summary: Atualiza a quantidade de mesas
+         description: Atualiza a quantidadde de mesas 
+         operationId: atualizaQuantitativoPeloId
+         parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: integer
+                format: int64
+                example: 1
+              description: seq quantitativo
+         requestBody:
+           required: true
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/UpdateRestaurante"
+         responses:
+           "200":
+             description: OK
+           "400":
+             description: Bad request
+           "404":
+             description: Not found"
+           "422":
+             description: Unprocessable entity
+       delete:
+        tags:
+          - CadastroRestaurante
+        summary: Deleta um registro quantitativo mesa por ID
+        description: Deleta um registro quantitativo mesa por ID
+        operationId: excluiQuantitativoMesa
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int64
+              example: 1
+            description: ID do Quantitativo
+        responses:
+          "204":
+            description: No content
+          "400":
+            description: Bad request
 		

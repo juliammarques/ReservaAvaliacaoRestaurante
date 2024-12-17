@@ -1,8 +1,10 @@
 package com.restaurante.reservaAvaliacao.application.useCase;
 
-import com.restaurante.reservaAvaliacao.application.useCase.CreateAvaliacaoUseCase;
-import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
-import com.restaurante.reservaAvaliacao.domain.service.AvaliacaoRestauranteDomainService;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -10,10 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
+import com.restaurante.reservaAvaliacao.domain.service.AvaliacaoRestauranteDomainService;
 
 class CreateAvaliacaoUseCaseTest {
 

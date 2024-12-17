@@ -1,18 +1,17 @@
 package com.restaurante.reservaAvaliacao.application.useCase;
 
-import com.restaurante.reservaAvaliacao.application.useCase.CreateQuantativoMesaUseCase;
-import com.restaurante.reservaAvaliacao.domain.entity.QuantitativoMesa;
-import com.restaurante.reservaAvaliacao.domain.service.QuantitativoMesaDomainService;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
+import com.restaurante.reservaAvaliacao.domain.entity.QuantitativoMesa;
+import com.restaurante.reservaAvaliacao.domain.service.QuantitativoMesaDomainService;
 
 class CreateQuantativoMesaUseCaseTest {
 

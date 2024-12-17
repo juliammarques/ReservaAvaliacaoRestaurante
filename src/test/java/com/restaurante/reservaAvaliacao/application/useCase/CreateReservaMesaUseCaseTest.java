@@ -1,21 +1,20 @@
 package com.restaurante.reservaAvaliacao.application.useCase;
 
-import com.restaurante.reservaAvaliacao.application.useCase.CreateReservaMesaUseCase;
-import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
-import com.restaurante.reservaAvaliacao.domain.service.ReservaMesaDomainService;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity.StatusReserva;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
+import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
+import com.restaurante.reservaAvaliacao.domain.service.ReservaMesaDomainService;
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity.StatusReserva;
 
 class CreateReservaMesaUseCaseTest {
 

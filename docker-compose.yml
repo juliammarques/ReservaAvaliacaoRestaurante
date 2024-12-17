@@ -1,0 +1,45 @@
+services:
+  app:
+    container_name: reservaAvaliacaoRestauranteApp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/reservaAvaliacaoRestaurantedb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    networks:
+      - rs-network
+  db:
+    container_name: postgresdb
+    image: postgres:16.4-alpine3.20
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: reservaAvaliacaoRestaurantedb
+    networks:
+      - reservaAvaliacaoRestaurante-network
+    healthcheck:
+      # Use the CMD-SHELL command to check the health
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      # Set the interval to 10 seconds
+      interval: 10s
+      # Set the timeout to 5 seconds
+      timeout: 5s
+      # Set the retries to 5
+      retries: 5
+    volumes:
+      - reservaAvaliacaoRestaurantedb-data:/var/lib/postgresql/data
+
+volumes:
+  reservaAvaliacaoRestaurantedb-data:
+
+networks:
+  reservaAvaliacaoRestaurante-network:

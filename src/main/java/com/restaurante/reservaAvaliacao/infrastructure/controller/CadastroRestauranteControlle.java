@@ -63,12 +63,12 @@ public class CadastroRestauranteControlle    {
 	}
 	
 	
-	public ResponseEntity<Void> criarQauntitativoMesaDisponivel(final CreateUpdateQuantitativoMesaDTO quantitativo){
+	public ResponseEntity<Void> criarQuantitativoMesaDisponivel(final CreateUpdateQuantitativoMesaDTO quantitativo){
 		createQuantativoMesaUseCase.execute(quantitativoMesaMapper.from(quantitativo));
 		return ResponseEntity.noContent().build();
 	}
 	
-	public ResponseEntity<Void> atualizaRestaurantePeloId(final Long id, final CreateUpdateQuantitativoMesaDTO quantitativo){
+	public ResponseEntity<Void> atualizaQuantitativoPeloId(final Long id, final CreateUpdateQuantitativoMesaDTO quantitativo){
 		updateQuantitativoMesaUseCase.execute(quantitativoMesaMapper.from(id, quantitativo));
 		return ResponseEntity.noContent().build();
 	}
