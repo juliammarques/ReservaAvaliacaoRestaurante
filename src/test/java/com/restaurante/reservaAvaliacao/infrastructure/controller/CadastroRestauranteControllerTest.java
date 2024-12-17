@@ -17,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 class CadastroRestauranteControllerTest {
 
     @Mock
@@ -44,7 +47,7 @@ class CadastroRestauranteControllerTest {
     private QuantitativoMesaMapper quantitativoMesaMapper;
 
     @InjectMocks
-    private CadastroRestauranteController cadastroRestauranteController;
+    private CadastroRestauranteControlle cadastroRestauranteController;
 
     @BeforeEach
     void setUp() {

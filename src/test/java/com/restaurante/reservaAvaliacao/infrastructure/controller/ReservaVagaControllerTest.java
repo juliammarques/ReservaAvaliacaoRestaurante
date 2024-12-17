@@ -5,8 +5,10 @@ import com.restaurante.reservaAvaliacao.application.dto.ReservaMesaDTO;
 import com.restaurante.reservaAvaliacao.application.dto.ReservaMesaPaginadoDTO;
 import com.restaurante.reservaAvaliacao.application.useCase.*;
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
-import com.restaurante.reservaAvaliacao.infrastructure.mapper.ReservaVagaMapper;
+import com.restaurante.reservaAvaliacao.infrastructure.mapper.ReservaMesaMapper;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity;
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity.StatusReserva;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -41,10 +43,10 @@ class ReservaVagaControllerTest {
     private GetReservaMesaByIdUseCase getReservaMesaById;
 
     @Mock
-    private ReservaVagaMapper reservaVagaMapper;
+    private ReservaMesaMapper reservaVagaMapper;
 
     @InjectMocks
-    private ReservaVagaController reservaVagaController;
+    private ReservaMesaController reservaVagaController;
 
     @BeforeEach
     void setUp() {
@@ -53,7 +55,7 @@ class ReservaVagaControllerTest {
 
     @Test
     void deveCriarReserva() {
-        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO(LocalDate.now(), 1L, "Cliente Teste", "1234567890", ReservaMesaEntity.StatusReserva.PENDENTE);
+        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO(LocalDate.now(), 1L, "Cliente Teste", "1234567890");
 
         // Executa a chamada ao método
         ResponseEntity<Void> response = reservaVagaController.criarReserva(reservaDTO);
@@ -68,7 +70,7 @@ class ReservaVagaControllerTest {
     @Test
     void deveAtualizarReserva() {
         Long id = 1L;
-        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO(LocalDate.now(), 1L, "Cliente Atualizado", "0987654321", ReservaMesaEntity.StatusReserva.PENDENTE);
+        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO(LocalDate.now(), 1L, "Cliente Atualizado", "0987654321");
 
         // Executa a chamada ao método
         ResponseEntity<Void> response = reservaVagaController.atualizaRestaurantePeloId(id, reservaDTO);
