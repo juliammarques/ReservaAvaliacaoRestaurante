@@ -1,99 +1,96 @@
 package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
-
+import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
+import com.restaurante.reservaAvaliacao.domain.gateway.AvaliacaoRestauranteGateway;
+import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
-import com.restaurante.reservaAvaliacao.infrastructure.gateway.AvaliacaoRestauranteGatewayImpl;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.AvaliacaoRestauranteEntity;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IAvaliacaoRestauranteRepository;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
-class AvaliacaoRestauranteGatewayImplTest {
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class AvaliacaoRestauranteGatewayTest {
 
     @Mock
-    private IAvaliacaoRestauranteRepository repository; // Mock do repositório
+    private AvaliacaoRestauranteGateway avaliacaoRestauranteGateway;
 
-    @InjectMocks
-    private AvaliacaoRestauranteGatewayImpl avaliacaoRestauranteGateway; // Classe que será testada
-
-    private AvaliacaoRestaurante avaliacaoRestaurante;
+    private AvaliacaoRestaurante avaliacao1;
+    private AvaliacaoRestaurante avaliacao2;
+    private Pagination<AvaliacaoRestaurante> pagination;
 
     @BeforeEach
     void setUp() {
         // Inicializa os mocks do Mockito
         MockitoAnnotations.openMocks(this);
 
-        // Setup de um objeto AvaliacaoRestaurante para os testes
-        avaliacaoRestaurante = new AvaliacaoRestaurante();
-        avaliacaoRestaurante.setSeqAvaliacao(1L);
-        avaliacaoRestaurante.setDataAvaliacao(LocalDate.now());
-        avaliacaoRestaurante.setNotaAvaliacao(5L);
-        avaliacaoRestaurante.setComentario("Excelente restaurante!");
+        // Criação de instâncias de AvaliacaoRestaurante para os testes
+        avaliacao1 = new AvaliacaoRestaurante(
+                LocalDate.of(2024, 12, 17), 4L, "Boa experiência", "123456789", 1L
+        );
+        avaliacao2 = new AvaliacaoRestaurante(
+                LocalDate.of(2024, 12, 18), 5L, "Excelente", "987654321", 1L
+        );
+
+        // Simulação de paginação com duas avaliações
+        List<AvaliacaoRestaurante> listaAvaliacoes = Arrays.asList(avaliacao1, avaliacao2);
+        pagination = Pagination.fromAvaliacao(listaAvaliacoes, 1, 2, 2, 1); // 2 itens, página 1, total 2, 1 página
     }
 
     @Test
     void testCreateAvaliacaoRestaurante() {
-        // Arrange
-        //when(repository.save(any(AvaliacaoRestauranteEntity.class))).thenReturn(avaliacaoRestaurante);
+        // Dado que chamamos o método de criar avaliação
+        doNothing().when(avaliacaoRestauranteGateway).createAvaliacaoRestaurante(any(AvaliacaoRestaurante.class));
 
-        // Act
-        //avaliacaoRestauranteGateway.createAvaliacaoRestaurante(avaliacaoRestaurante);
+        // Chamada ao método
+        avaliacaoRestauranteGateway.createAvaliacaoRestaurante(avaliacao1);
 
-        // Assert
-        verify(repository, times(1)).save(any(AvaliacaoRestauranteEntity.class)); // Verifica se o save foi chamado
+        // Verificar se o método foi chamado uma vez
+        verify(avaliacaoRestauranteGateway, times(1)).createAvaliacaoRestaurante(any(AvaliacaoRestaurante.class));
     }
 
     @Test
-    void testReadAvaliacaoRestaurante() {
-        // Arrange
-        //when(repository.findById(1L)).thenReturn(Optional.of(avaliacaoRestaurante));
+    void testFindAll() {
+        // Dado que chamamos o método de encontrar avaliações
+        when(avaliacaoRestauranteGateway.findAll(1, 2, 1L)).thenReturn(pagination);
 
-        // Act
-        //Optional<AvaliacaoRestauranteEntity> resultado = avaliacaoRestauranteGateway.readAvaliacaoRestaurante(1L);
+        // Chamada ao método
+        Pagination<AvaliacaoRestaurante> result = avaliacaoRestauranteGateway.findAll(1, 2, 1L);
 
-        // Assert
-        //assertTrue(resultado.isPresent()); // Verifica se a avaliação foi encontrada
-        //assertEquals(avaliacaoRestaurante.getSeqAvaliacao(), resultado.get().getSeqAvaliacao()); // Verifica se o seqAvaliacao corresponde
+        // Verificar se o resultado contém as duas avaliações esperadas
+        assertNotNull(result);
+        assertEquals(2, result.items().size());
+        assertEquals(avaliacao1, result.items().get(0));
+        assertEquals(avaliacao2, result.items().get(1));
+
+        // Verificar se o método findAll foi chamado uma vez com os parâmetros corretos
+        verify(avaliacaoRestauranteGateway, times(1)).findAll(1, 2, 1L);
     }
 
     @Test
-    void testUpdateAvaliacaoRestaurante() {
-        // Arrange
-        AvaliacaoRestauranteEntity updatedAvaliacao = new AvaliacaoRestauranteEntity();
-        updatedAvaliacao.setSeqAvaliacao(1L);
-        updatedAvaliacao.setDataAvaliacao(LocalDate.now());
-        updatedAvaliacao.setNotaAvaliacao(4L); // Mudou a nota
-        updatedAvaliacao.setComentario("Bom, mas pode melhorar.");
-
-        when(repository.save(any(AvaliacaoRestauranteEntity.class))).thenReturn(updatedAvaliacao);
-
-        // Act
-        //avaliacaoRestauranteGateway.updateAvaliacaoRestaurante(updatedAvaliacao);
-
-        // Assert
-        verify(repository, times(1)).save(any(AvaliacaoRestauranteEntity.class)); // Verifica se o save foi chamado
+    void testPaginationProperties() {
+        // Verificar propriedades de paginação
+        assertEquals(1, pagination.page());  // Página 1
+        assertEquals(2, pagination.size());  // Tamanho da página 2
+        assertEquals(2, pagination.total()); // Total de 2 itens
+        assertEquals(1, pagination.totalPages()); // 1 página total
     }
 
     @Test
-    void testDeleteAvaliacaoRestaurante() {
-        // Arrange
-        doNothing().when(repository).deleteById(1L);
+    void testMapPaginationItems() {
+        // Mapeando as avaliações para um tipo diferente (exemplo: convertendo AvaliacaoRestaurante em String)
+        Pagination<String> mappedPagination = pagination.map(avaliacao -> "Nota: " + avaliacao.getNotaAvaliacao());
 
-        // Act
-        //avaliacaoRestauranteGateway.deleteAvaliacaoRestaurante(1L);
-
-        // Assert
-        verify(repository, times(1)).deleteById(1L); // Verifica se o deleteById foi chamado
+        // Verificar se a paginação foi mapeada corretamente
+        assertNotNull(mappedPagination);
+        assertEquals(2, mappedPagination.items().size());
+        assertEquals("Nota: 4", mappedPagination.items().get(0));
+        assertEquals("Nota: 5", mappedPagination.items().get(1));
     }
 }

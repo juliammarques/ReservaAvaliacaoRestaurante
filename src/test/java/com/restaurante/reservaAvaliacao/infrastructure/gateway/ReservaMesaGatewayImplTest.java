@@ -1,18 +1,23 @@
 package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
-import com.restaurante.reservaAvaliacao.infrastructure.gateway.ReservaMesaGatewayImpl;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IReservaMesaRepository;
+import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity.StatusReserva;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,7 +43,8 @@ class ReservaMesaGatewayImplTest {
                 LocalDate.now(), // dataReserva
                 1L, // seqRestaurante
                 "Cliente Teste", // nomeCliente
-                "12345678901" // documentoCliente
+                "12345678901", // documentoCliente
+                StatusReserva.CONFIRMADA // status
         );
     }
 
@@ -55,31 +61,36 @@ class ReservaMesaGatewayImplTest {
     }
 
     @Test
-    void testBuscaReservaMesaPorCliente() {
+    void testFindAll() {
         // Arrange
-        ReservaMesaEntity reservaMesaEntity = new ReservaMesaEntity(
-                1L, // seqReservaMesa
-                LocalDate.now(), // dataReserva
-                1L, // seqRestaurante
-                "Cliente Teste", // nomeCliente
-                "12345678901" // documentoCliente
-        );
+        int page = 0;
+        int size = 10;
+        long seqRestaurante = 1L;
+        PageRequest pageRequest = PageRequest.of(page, size);
 
-        // Simula o retorno de uma lista de reservas para o cliente com documento "12345678901"
-        when(repository.findAll((Example<ReservaMesaEntity>) any())).thenReturn(List.of(reservaMesaEntity));
+        // Simula o retorno de um Page com uma reserva
+        Page<ReservaMesaEntity> pageResponse = new PageImpl<>(
+                List.of(ReservaMesaEntity.of(reservaMesa)),
+                pageRequest, 1);
+
+        when(repository.findAll((Example<ReservaMesaEntity>) any(), eq(pageRequest))).thenReturn(pageResponse);
 
         // Act
-        List<ReservaMesa> reservas = reservaMesaGateway.buscaReservaMesaPorCliente("12345678901");
+        Pagination<ReservaMesa> result = reservaMesaGateway.findAll(page, size, seqRestaurante);
 
         // Assert
-        assertNotNull(reservas);
-        assertFalse(reservas.isEmpty()); // Verifica se a lista não está vazia
-        assertEquals(1, reservas.size()); // Verifica que há uma reserva na lista
+        assertNotNull(result);
+        assertEquals(1, result.total()); // Total de elementos
+        assertEquals(1, result.totalPages()); // Total de páginas
+        assertEquals(1, result.items().size()); // Verifica que há 1 item na lista
+        assertEquals("Cliente Teste", result.items().get(0).getNomeCliente()); // Verifica o nome do cliente
+        assertEquals(StatusReserva.CONFIRMADA, result.items().get(0).getStatus()); // Verifica o status da reserva
     }
 
     @Test
     void testUpdateReserva() {
         // Arrange
+        reservaMesa.setStatus(StatusReserva.CONFIRMADA); // Atualiza o status
         when(repository.save(any(ReservaMesaEntity.class))).thenReturn(ReservaMesaEntity.of(reservaMesa));
 
         // Act
@@ -99,5 +110,31 @@ class ReservaMesaGatewayImplTest {
 
         // Assert
         verify(repository, times(1)).deleteById(1L); // Verifica se o deleteById foi chamado
+    }
+
+    @Test
+    void testGetReservaMesaByIdFound() {
+        // Arrange
+        when(repository.findById(1L)).thenReturn(Optional.of(ReservaMesaEntity.of(reservaMesa)));
+
+        // Act
+        Optional<ReservaMesa> result = reservaMesaGateway.getReservaMesaById(1L);
+
+        // Assert
+        assertTrue(result.isPresent());
+        assertEquals(reservaMesa.getNomeCliente(), result.get().getNomeCliente()); // Verifica o nome do cliente
+        assertEquals(reservaMesa.getStatus(), result.get().getStatus()); // Verifica o status da reserva
+    }
+
+    @Test
+    void testGetReservaMesaByIdNotFound() {
+        // Arrange
+        when(repository.findById(1L)).thenReturn(Optional.empty());
+
+        // Act
+        Optional<ReservaMesa> result = reservaMesaGateway.getReservaMesaById(1L);
+
+        // Assert
+        assertFalse(result.isPresent()); // Verifica se não foi encontrado
     }
 }
