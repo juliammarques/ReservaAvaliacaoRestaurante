@@ -43,9 +43,11 @@ class AvaliacaoRestauranteControllerTest {
     @Test
     void deveCriarAvaliacao() {
         // Dados de entrada
-        CreateAvaliacaoRestauranteDTO avaliacaoDTO = new CreateAvaliacaoRestauranteDTO(
-                LocalDate.now(), 5L, "Excelente", "123456789", 1L
-        );
+        CreateAvaliacaoRestauranteDTO avaliacaoDTO = new CreateAvaliacaoRestauranteDTO();
+       avaliacaoDTO.setNotaAvaliacao(5l);
+       avaliacaoDTO.setComentario("Excelente");
+       avaliacaoDTO.setDocumentoCliente("11122233344");
+       avaliacaoDTO.setSeqRestaurante(1l);        
 
         // Executa a chamada ao método
         ResponseEntity<Void> response = avaliacaoRestauranteController.criarAvaliacao(avaliacaoDTO);

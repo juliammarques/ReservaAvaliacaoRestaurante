@@ -15,7 +15,7 @@ public class CreateAvaliacaoUseCase {
 	private final AvaliacaoRestauranteDomainService service;
 	
 	public void execute (Input input) {
-		service.adicionaAvaliacaoRestaurante(new AvaliacaoRestaurante(input.dataAvaliacao, input.notaAvaliacao, input.comentario, input.documentoCliente, input.seqRestaurante));
+		service.adicionaAvaliacaoRestaurante(new AvaliacaoRestaurante(LocalDate.now(), input.notaAvaliacao, input.comentario, input.documentoCliente, input.seqRestaurante));
 	}
 	
 	public record Input(LocalDate dataAvaliacao,Long notaAvaliacao,String comentario,String documentoCliente,Long seqRestaurante) {

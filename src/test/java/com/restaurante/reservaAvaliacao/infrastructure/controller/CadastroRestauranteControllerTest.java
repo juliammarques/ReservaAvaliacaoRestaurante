@@ -56,8 +56,10 @@ class CadastroRestauranteControllerTest {
 
     @Test
     void deveCriarRestaurante() {
-        CreateUpdateRestauranteDTO restauranteDTO = new CreateUpdateRestauranteDTO("Restaurante Teste", "Rua A", "Italiana");
-
+        CreateUpdateRestauranteDTO restauranteDTO = new CreateUpdateRestauranteDTO();
+        restauranteDTO.setEndereco("Restaurante Teste");
+        restauranteDTO.setNomeRestaurante("Rua A");
+        restauranteDTO.setTipoCozinha("Italiana");
         // Executa a chamada ao método
         ResponseEntity<Void> response = cadastroRestauranteController.criarRestaurante(restauranteDTO);
 
@@ -71,8 +73,10 @@ class CadastroRestauranteControllerTest {
     @Test
     void deveAtualizarRestaurantePeloId() {
         Long id = 1L;
-        CreateUpdateRestauranteDTO restauranteDTO = new CreateUpdateRestauranteDTO("Restaurante Atualizado", "Rua B", "Francesa");
-
+        CreateUpdateRestauranteDTO restauranteDTO = new CreateUpdateRestauranteDTO();
+        restauranteDTO.setEndereco("Restaurante Atualizado");
+        restauranteDTO.setNomeRestaurante("Rua B");
+        restauranteDTO.setTipoCozinha("Francesa");
         // Executa a chamada ao método
         ResponseEntity<Void> response = cadastroRestauranteController.atualizaRestaurantePeloId(id, restauranteDTO);
 
@@ -106,8 +110,10 @@ class CadastroRestauranteControllerTest {
 
     @Test
     void deveCriarQuantitativoMesa() {
-        CreateUpdateQuantitativoMesaDTO quantitativoDTO = new CreateUpdateQuantitativoMesaDTO(10);
-
+        CreateUpdateQuantitativoMesaDTO quantitativoDTO = new CreateUpdateQuantitativoMesaDTO();
+        quantitativoDTO.setSeqRestaurante(1l);
+        quantitativoDTO.setTamanhoMesa("4 lugares");
+        quantitativoDTO.setQuantidadeDisponivel(3l);
         // Executa a chamada ao método
         ResponseEntity<Void> response = cadastroRestauranteController.criarQauntitativoMesaDisponivel(quantitativoDTO);
 
@@ -121,8 +127,10 @@ class CadastroRestauranteControllerTest {
     @Test
     void deveAtualizarQuantitativoMesa() {
         Long id = 1L;
-        CreateUpdateQuantitativoMesaDTO quantitativoDTO = new CreateUpdateQuantitativoMesaDTO(20);
-
+        CreateUpdateQuantitativoMesaDTO quantitativoDTO = new CreateUpdateQuantitativoMesaDTO();
+        quantitativoDTO.setSeqRestaurante(1l);
+        quantitativoDTO.setTamanhoMesa("2 lugares");
+        quantitativoDTO.setQuantidadeDisponivel(4l);
         // Executa a chamada ao método
         ResponseEntity<Void> response = cadastroRestauranteController.atualizaRestaurantePeloId(id, quantitativoDTO);
 

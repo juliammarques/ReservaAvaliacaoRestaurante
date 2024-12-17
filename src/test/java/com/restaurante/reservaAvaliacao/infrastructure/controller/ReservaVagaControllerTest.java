@@ -55,8 +55,11 @@ class ReservaVagaControllerTest {
 
     @Test
     void deveCriarReserva() {
-        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO(LocalDate.now(), 1L, "Cliente Teste", "1234567890");
-
+        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO();
+        reservaDTO.setDataReserva(null);
+        reservaDTO.setDocumentoCliente("10354312608");
+        reservaDTO.setNomeCliente("Jose Marcelo");
+        reservaDTO.setSeqRestaurante(1l);
         // Executa a chamada ao método
         ResponseEntity<Void> response = reservaVagaController.criarReserva(reservaDTO);
 
@@ -70,8 +73,11 @@ class ReservaVagaControllerTest {
     @Test
     void deveAtualizarReserva() {
         Long id = 1L;
-        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO(LocalDate.now(), 1L, "Cliente Atualizado", "0987654321");
-
+        CreateUpdateReservaMesaDTO reservaDTO = new CreateUpdateReservaMesaDTO();
+        reservaDTO.setDataReserva(null);
+        reservaDTO.setDocumentoCliente("10354212608");
+        reservaDTO.setNomeCliente("Jose firmino");
+        reservaDTO.setSeqRestaurante(1l);
         // Executa a chamada ao método
         ResponseEntity<Void> response = reservaVagaController.atualizaRestaurantePeloId(id, reservaDTO);
 
