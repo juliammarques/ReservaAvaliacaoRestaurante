@@ -1,4 +1,4 @@
-package com.restaurante.reservaAvaliacao.gateway;
+package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
 import com.restaurante.reservaAvaliacao.infrastructure.gateway.ReservaMesaGatewayImpl;

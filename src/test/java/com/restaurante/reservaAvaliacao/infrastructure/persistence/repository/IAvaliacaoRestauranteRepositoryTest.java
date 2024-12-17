@@ -1,7 +1,6 @@
-package com.restaurante.reservaAvaliacao.repository;
+package com.restaurante.reservaAvaliacao.infrastructure.persistence.repository;
 
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.AvaliacaoRestauranteEntity;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IAvaliacaoRestauranteRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

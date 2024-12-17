@@ -1,4 +1,4 @@
-package com.restaurante.reservaAvaliacao.useCase;
+package com.restaurante.reservaAvaliacao.application.useCase;
 
 import com.restaurante.reservaAvaliacao.application.useCase.CreateRestauranteUseCase;
 import com.restaurante.reservaAvaliacao.domain.service.RestauranteDomainService;

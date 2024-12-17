@@ -1,4 +1,4 @@
-package com.restaurante.reservaAvaliacao.gateway;
+package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
