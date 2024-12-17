@@ -16,8 +16,8 @@ tags:
 paths:
    /avaliacaoRestaurante:
    post:
-   tags:
-   - AvaliacaoRestaurante
+     tags:
+      - AvaliacaoRestaurante
    summary: Cria uma Avaliacao
    description: Adiciona uma nova avaliacao para o Restaurante apos o cliente visitar o mesmo
    operationId: criarAvaliacao
@@ -34,3 +34,7 @@ paths:
              description: Bad request
            "422":
              description: Unprocessable entity
+/listaAvaliacoes/{seqRestaurante}:
+   get:
+    tags:
+     -AvaliacaoRestaurante
