@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.restaurante.reservaAvaliacao.application.useCase.GetAllReservaMesaUseCase.Output;
+import com.restaurante.reservaAvaliacao.domain.entity.AvaliacaoRestaurante;
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
 import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 
@@ -22,6 +22,10 @@ public record Pagination<T>(int page, int size, int total, int totalPages, List<
     }
     
     public static Pagination<ReservaMesa> from(List<ReservaMesa> items,int page, int size, int total, int totalPages) {
+        return new Pagination<>(page, size, total, totalPages, items);
+    }
+    
+    public static Pagination<AvaliacaoRestaurante> fromAvaliacao(List<AvaliacaoRestaurante> items,int page, int size, int total, int totalPages) {
         return new Pagination<>(page, size, total, totalPages, items);
     }
 

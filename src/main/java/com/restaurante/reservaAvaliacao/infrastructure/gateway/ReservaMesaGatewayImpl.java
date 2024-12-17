@@ -1,7 +1,5 @@
 package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -9,11 +7,9 @@ import org.springframework.data.domain.Pageable;
 
 import com.restaurante.reservaAvaliacao.domain.Specification.ReservaMesaSpec;
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
-import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 import com.restaurante.reservaAvaliacao.domain.gateway.ReservaMesaGateway;
 import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity;
-import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.RestauranteEntity;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IReservaMesaRepository;
 
 import lombok.RequiredArgsConstructor;

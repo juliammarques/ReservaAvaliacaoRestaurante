@@ -3,7 +3,6 @@ package com.restaurante.reservaAvaliacao.infrastructure.persistence.entity;
 import java.time.LocalDate;
 
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
-import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

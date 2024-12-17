@@ -1,8 +1,5 @@
 package com.restaurante.reservaAvaliacao.application.useCase;
 
-import java.time.LocalDate;
-
-import com.restaurante.reservaAvaliacao.application.useCase.UpdateReservaMesaUseCase.Input;
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
 import com.restaurante.reservaAvaliacao.domain.service.ReservaMesaDomainService;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity.StatusReserva;
