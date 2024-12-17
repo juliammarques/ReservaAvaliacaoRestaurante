@@ -7,5 +7,30 @@ servers:
   - url: http://localhost:8080
     description: Local server
 tags:
-  - name: Restaurante
-    description: Operacoes de cadastro e busca de restaurantes
+  - name: AvaliacaoRestaurante
+    description: Operações de avaliar e listar avaliacoes restaurante
+  - name: CadastroRestaurante
+    description: Operacoes de cadastros e busca Restaurante
+  - name: ReservaMesa
+    description: Operacooes de reservar de vaga restaurante
+paths:
+   /avaliacaoRestaurante:
+   post:
+   tags:
+   - AvaliacaoRestaurante
+   summary: Cria uma Avaliacao
+   description: Adiciona uma nova avaliacao para o Restaurante apos o cliente visitar o mesmo
+   operationId: criarAvaliacao
+   requestBody:
+    required: true
+    content:
+      application/json:
+       schema:
+        $ref: "#/components/schemas/CreateAvaliacao"
+        responses:
+           "200":
+             description: OK
+           "400":
+             description: Bad request
+           "422":
+             description: Unprocessable entity
