@@ -38,3 +38,41 @@ paths:
    get:
     tags:
      -AvaliacaoRestaurante
+    summary: Listar Avaliacoes por restaurante
+    description: Listar Avaliacoes por restaurante
+    operationId: listaAvaliacoes
+    parameters:
+     - name: seqRestaurante
+       in: path
+       required: true
+       schema:
+        type: long
+        format: int64
+        example: 1
+       description: ID do Parquimetro
+     - name: page
+       in: query 
+       required: false
+       schema:
+        type: integer
+        format: int32
+        default: 0
+        example: 0
+       description: numero pagina
+     - name: size
+       in: query
+       required: false
+       schema:
+        type: integer
+        format: int32
+        default: 10
+        example: 10
+       description: Tamanho da página
+    responses:
+     "200":
+      description: OK
+      content:
+        application/json:
+         schema:
+           $ref: "#/components/schemas/AvaliacaoRestaurantePaginado"
+		
