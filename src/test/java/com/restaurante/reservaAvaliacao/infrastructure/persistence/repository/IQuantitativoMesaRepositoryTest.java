@@ -35,7 +35,7 @@ class IQuantitativoMesaRepositoryTest {
         quantitativoMesa = new QuantitativoMesaEntity();
         quantitativoMesa.setSeqQuantitativoMesaEntity(1L);
         quantitativoMesa.setSeqRestaurante(1L);
-        quantitativoMesa.setTamanhoMesa(4L);
+        quantitativoMesa.setTamanhoMesa("4");
         quantitativoMesa.setQuantidadeDisponivel(10L);
     }
 
@@ -103,7 +103,7 @@ class IQuantitativoMesaRepositoryTest {
         QuantitativoMesaEntity quantitativoMesaAtualizada = new QuantitativoMesaEntity();
         quantitativoMesaAtualizada.setSeqQuantitativoMesaEntity(1L);
         quantitativoMesaAtualizada.setSeqRestaurante(1L);
-        quantitativoMesaAtualizada.setTamanhoMesa(6L);
+        quantitativoMesaAtualizada.setTamanhoMesa("6");
         quantitativoMesaAtualizada.setQuantidadeDisponivel(8L);
 
         // Simulando o comportamento do repositório
