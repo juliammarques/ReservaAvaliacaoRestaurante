@@ -2,11 +2,18 @@ package com.restaurante.reservaAvaliacao.infrastructure.gateway;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.restaurante.reservaAvaliacao.domain.Specification.ReservaMesaSpec;
 import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
+import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 import com.restaurante.reservaAvaliacao.domain.gateway.ReservaMesaGateway;
+import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.ReservaMesaEntity;
+import com.restaurante.reservaAvaliacao.infrastructure.persistence.entity.RestauranteEntity;
 import com.restaurante.reservaAvaliacao.infrastructure.persistence.repository.IReservaMesaRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,22 +30,15 @@ public class ReservaMesaGatewayImpl implements ReservaMesaGateway {
 	}
 	
 	@Override
-	// alterar retorno
-	public List<ReservaMesa> buscaReservaMesaPorCliente(String documento){
-		
-		List<ReservaMesaEntity> reservaEntity = repository.findAll(ReservaMesaSpec.buscaPorDocumentoCliente(documento));
-		List<ReservaMesa> resposta = new ArrayList<ReservaMesa>();
-		for(var entity : reservaEntity) {
-			ReservaMesa reserva = null;
-			reserva.to(entity);
-			resposta.add(reserva);
-		}
-		return resposta;
+	public Pagination<ReservaMesa> findAll(int page, int size,Long seqResataurante){
+        final var pageable = Pageable.ofSize(size).withPage(page);
+        Page<ReservaMesa> listaReservaRestaurante = repository.findAll(ReservaMesaSpec.buscaPorSeqRestaurante(seqResataurante),pageable).map(ReservaMesaEntity::toReserva);
+		return Pagination.from(listaReservaRestaurante.getContent(),listaReservaRestaurante.getNumber(), listaReservaRestaurante.getSize(), (int) listaReservaRestaurante.getTotalElements(),
+				listaReservaRestaurante.getTotalPages());
 	}
 	
 	@Override
 	public void updateReserva(ReservaMesa reserva) {
-		
 		repository.save(ReservaMesaEntity.of(reserva));
 	}
 	
@@ -47,5 +47,9 @@ public class ReservaMesaGatewayImpl implements ReservaMesaGateway {
 		repository.deleteById(idReserva);
 	}
 	
+	@Override
+    public Optional<ReservaMesa> getReservaMesaById(final Long seqReserva) {
+        return repository.findById(seqReserva).map(ReservaMesaEntity::toReserva);
+    }
 	// gerenciar reservar busca reserva por data 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.restaurante.reservaAvaliacao.application.useCase.GetAllReservaMesaUseCase.Output;
+import com.restaurante.reservaAvaliacao.domain.entity.ReservaMesa;
 import com.restaurante.reservaAvaliacao.domain.entity.Restaurante;
 
 public record Pagination<T>(int page, int size, int total, int totalPages, List<T> items) {
@@ -13,8 +15,14 @@ public record Pagination<T>(int page, int size, int total, int totalPages, List<
         final var totalPages = (total + size - 1) / size;
         return new Pagination<>(page, size, total, totalPages, mappedItems);
     }
+    
 
     public static Pagination<Restaurante> from(int page, int size, int total, int totalPages, List<Restaurante> items) {
         return new Pagination<>(page, size, total, totalPages, items);
     }
+    
+    public static Pagination<ReservaMesa> from(List<ReservaMesa> items,int page, int size, int total, int totalPages) {
+        return new Pagination<>(page, size, total, totalPages, items);
+    }
+
 }
