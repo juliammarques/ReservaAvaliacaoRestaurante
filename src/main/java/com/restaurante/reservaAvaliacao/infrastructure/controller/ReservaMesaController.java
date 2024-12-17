@@ -12,14 +12,14 @@ import com.restaurante.reservaAvaliacao.application.useCase.GetReservaMesaByIdUs
 import com.restaurante.reservaAvaliacao.application.useCase.UpdateReservaMesaUseCase;
 import com.restaurante.reservaAvaliacao.application.useCase.UpdateStatusConfirmadoReservaMesaUseCase;
 import com.restaurante.reservaAvaliacao.application.useCase.UpdateStatusEncerradoReservaMesaUseCase;
-import com.restaurante.reservaAvaliacao.infrastructure.mapper.ReservaVagaMapper;
+import com.restaurante.reservaAvaliacao.infrastructure.mapper.ReservaMesaMapper;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class ReservaVagaController {
+public class ReservaMesaController {
 
 	@NonNull
 	private final CreateReservaMesaUseCase createReservaMesa;
@@ -37,7 +37,7 @@ public class ReservaVagaController {
 	private final GetReservaMesaByIdUseCase getReservaMesaById;
 		
 	@NonNull
-	private final ReservaVagaMapper reservaMapper;
+	private final ReservaMesaMapper reservaMapper;
 	
 	
 	public ResponseEntity<Void> criarReserva(final CreateUpdateReservaMesaDTO reserva){

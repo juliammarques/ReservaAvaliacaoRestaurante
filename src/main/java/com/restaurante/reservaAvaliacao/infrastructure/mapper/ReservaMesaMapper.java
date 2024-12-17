@@ -13,7 +13,7 @@ import com.restaurante.reservaAvaliacao.application.useCase.UpdateStatusConfirma
 import com.restaurante.reservaAvaliacao.application.useCase.UpdateStatusEncerradoReservaMesaUseCase;
 import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 
-public class ReservaVagaMapper {
+public class ReservaMesaMapper {
 
 	public CreateReservaMesaUseCase.Input from(final CreateUpdateReservaMesaDTO dto) {
         return new CreateReservaMesaUseCase.Input(dto.getNomeCliente(), dto.getDocumentoCliente(), dto.getDataReserva(), dto.getSeqRestaurante());
