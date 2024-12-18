@@ -40,12 +40,12 @@ public class ReservaMesaController {
 	private final ReservaMesaMapper reservaMapper;
 	
 	
-	public ResponseEntity<Void> criarReserva(final CreateUpdateReservaMesaDTO reserva){
+	public ResponseEntity<Void> ReservaMesa(final CreateUpdateReservaMesaDTO reserva){
 		createReservaMesa.execute(reservaMapper.from(reserva));
 		return ResponseEntity.noContent().build();
 	}
 	
-	public ResponseEntity<Void> atualizaRestaurantePeloId(final Long id, final CreateUpdateReservaMesaDTO reserva){
+	public ResponseEntity<Void> atualizaReservaPeloId(final Long id, final CreateUpdateReservaMesaDTO reserva){
 		UpdateReservaMesa.execute(reservaMapper.from(id, reserva));
 		return ResponseEntity.noContent().build();
 	}
@@ -55,7 +55,7 @@ public class ReservaMesaController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	public ResponseEntity<Void> atualizaRestaurantePeloId(final Long id){
+	public ResponseEntity<Void> atualizaStatusEncerrado (final Long id){
 		updateStatusEncerradoReservaMesaUseCase.execute(reservaMapper.fromInput(id));
 		return ResponseEntity.noContent().build();
 	}

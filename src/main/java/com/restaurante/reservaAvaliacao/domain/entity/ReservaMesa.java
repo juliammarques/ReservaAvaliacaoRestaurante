@@ -34,6 +34,13 @@ public class ReservaMesa {
 		this.status = status;
 	}
 	
+	public ReservaMesa (LocalDate dataReserva,Long seqRestaurante,String nomeCliente,String documentoCliente){
+		this.dataReserva = dataReserva;
+		this.seqRestaurante = seqRestaurante;
+		this.nomeCliente = nomeCliente;
+		this.documentoCliente = documentoCliente;
+	}
+	
 	public ReservaMesa (Long seqRestaurante,LocalDate dataReserva){
 		this.dataReserva = dataReserva;
 		this.seqRestaurante = seqRestaurante;

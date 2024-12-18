@@ -196,7 +196,7 @@ paths:
            content:
              application/json:
                schema:
-                 $ref: "#/components/schemas/UpdateRestaurante"
+                 $ref: "#/components/schemas/UpdateQuantitativo"
          responses:
            "200":
              description: OK
@@ -226,4 +226,163 @@ paths:
             description: No content
           "400":
             description: Bad request
+/ReservaMesa:	
+      post:
+       tags:
+         - ReservaMesa
+       summary: Cria Reserva
+       description: Cria Reserva
+       operationId: ReservaMesa
+       requestBody:
+         required: true
+         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReserva"
+       responses:
+          "200":
+            description: OK
+          "400":
+            description: Bad request
+          "422":
+            description: Unprocessable entity
+       put:
+        tags:
+          - ReservaMesa
+        summary: Atualiza reserva mesa
+        description: Atualiza reserva mesa
+        operationId: atualizaReservaPeloId
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int64
+              example: 1
+            description: id reserva
+        requestBody:
+           required: true
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/UpdateReserva"
+        responses:
+           "200":
+             description: OK
+           "400":
+             description: Bad request
+           "404":
+             description: Not found"
+           "422":
+             description: Unprocessable entity
+      put:
+       tags:
+         - ReservaMesa
+       summary: atualisa status confirmado
+       description: atualisa status confirmados 
+       operationId: atualisaStatusConfirmado
+       parameters:
+         - name: id
+           in: path
+           required: true
+           schema:
+            type: integer
+            format: int64
+            example: 1
+           description: id reserva
+      responses:
+         "200":
+           description: OK
+         "400":
+           description: Bad request
+         "404":
+           description: Not found"
+         "422":
+           description: Unprocessable entity
+/ReservaMesa/{id}:
+      put:
+       tags:
+         - ReservaMesa
+       summary: atualiza Status Encerrado
+       description: atualiza Status Encerrado
+       operationId: atualizaStatusEncerrado
+       parameters:
+         - name: id
+           in: path
+           required: true
+           schema:
+            type: integer
+            format: int64
+            example: 1
+      description: id reserva
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request
+        "404":
+          description: Not found"
+        "422":
+          description: Unprocessable entity
+      get:
+       tags:
+        -ReservaMesa
+       summary: Listar Restaurantes
+       description: Listar restaurante
+       operationId: listaRestaurantes
+       parameters:
+         - name: page
+           in: query 
+           required: false
+           schema:
+            type: integer
+            format: int32
+            default: 0
+            example: 0
+           description: numero pagina
+         - name: size
+           in: query
+           required: false
+           schema:
+            type: integer
+            format: int32
+            default: 10
+            example: 10
+            description: Tamanho da página
+       responses:
+         "200":
+           description: OK
+           content:
+            application/json:
+               schema:
+                $ref: "#/components/schemas/listaReservaPaginada"
+components:
+  schemas:
+   CreateAvaliacao:
+    type: object
+    properties:
+      comentario:
+        type: string
+        example: "excelente"
+        maxLength: 255
+      documentoCliente:
+       type: string
+       example: "10254212609"
+       maxLength: 255
+      notaAvaliacao:
+        type: number
+        format: long
+        example: 5
+      seqRestaurante:
+        type: number
+        format: long
+        example: 5
+    required:
+      - comentario
+      - notaAvaliacao
+      - documentoCliente
+      - seqRestaurante
+
+
 		
