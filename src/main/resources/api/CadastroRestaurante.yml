@@ -563,7 +563,80 @@ components:
                       type: object
                       properties:
                         nomeCliente:
-                          type: string
-                          example: "excelente"
-                          maxLength: 255
-			
+                           type: string
+                           example: "excelente"
+                           maxLength: 255
+                        documentoCliente:
+                           type: string
+                           example: "10254212609"
+                           maxLength: 255
+                        dataReserva:
+                         type: date
+                         format: date
+                         example: 15/07/2024
+                        seqRestaurante:
+                          type: number
+                          format: long
+                          example: 5
+                        seqReservaMesa:
+                           type: number
+                           format: long
+                           example: 5
+                        required:
+                           - nomeCliente
+                           - dataReserva
+                           - documentoCliente
+                           - seqRestaurante
+                           - seqReservaMesa	  
+        AvaliacaoRestaurantePaginado:
+               type: object
+               properties:
+                  data:
+                  type: array
+                  items:
+                     $ref: "#/components/schemas/AvaliacaoRestaurante"
+                  pagination:
+                       $ref: "#/components/schemas/Pagination"
+        reservaMesaPaginada:
+                 type: object
+                 properties:
+                     data:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/ReservaMesa"
+                 pagination:
+                   $ref: "#/components/schemas/Pagination"
+        ListarRestaurantePaginado:
+                 type: object
+                 properties:
+                     data:
+                     type: array
+                     items:
+                        $ref: "#/components/schemas/Restaurante"
+                 pagination:
+                   $ref: "#/components/schemas/Pagination"
+        Pagination:
+           type: object
+           properties:
+            page:
+              type: integer
+              format: int32
+              example: 0
+              description: Page number
+              size:
+               type: integer
+               format: int32
+               example: 10
+               description: Page size
+              total:
+                 type: integer
+                 format: int32
+                 example: 100
+                 description: Total number itens
+              totalPages:
+                 type: integer
+                 format: int32
+                 example: 10
+                 description: Total number of pages
+
+		
