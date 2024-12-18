@@ -383,6 +383,187 @@ components:
       - notaAvaliacao
       - documentoCliente
       - seqRestaurante
-
-
-		
+   schemas:
+    UpdateRestaurante:
+     type: object
+     properties:
+       tipoCozinha:
+         type: string
+         example: "italiana"
+         maxLength: 255
+       endereco:
+         type: string
+         example: "rua x bairro z"
+         maxLength: 255
+       nomeRestaurante:
+          type: string
+          example: "flor do mar"
+          maxLength: 255
+     required:
+        - tipoCozinha
+        - endereco
+        - nomeRestaurante
+    schemas:
+     CreateRestaurante:
+      type: object
+      properties:
+        tipoCozinha:
+          type: string
+          example: "italiana"
+          maxLength: 255
+        endereco:
+          type: string
+          example: "rua x bairro z"
+          maxLength: 255
+        nomeRestaurante:
+          type: string
+          example: "flor do mar"
+          maxLength: 255
+      required:
+        - tipoCozinha
+        - endereco
+        - nomeRestaurante
+     schemas:
+      CreateReserva:
+      type: object
+      properties:
+        nomeCliente:
+         type: string
+         example: "excelente"
+         maxLength: 255
+        documentoCliente:
+          type: string
+          example: "10254212609"
+          maxLength: 255
+        dataReserva:
+          type: date
+          format: date
+          example: 15/07/2024
+        seqRestaurante:
+           type: number
+           format: long
+           example: 5
+        required:
+           - nomeCliente
+           - dataReserva
+           - documentoCliente
+           - seqRestaurante
+        schemas:
+         UpdateReserva:
+         type: object
+         properties:
+           dataReserva:
+            type: date
+            format: date
+            example: 15/07/2024
+           required:
+             - dataReserva
+      schemas:
+        CreateQuantitativo:
+        type: object
+        properties:
+          tamanhoMesa:
+            type: string
+            example: "4 cadeiras"
+            maxLength: 255
+          seqRestaurante:
+           type: number
+           format: long
+           example: 5
+          quantidadeDisponivel:
+            type: number
+            format: long
+            example: 5
+          required:
+            - seqRestaurante
+            - tamanhoMesa
+            - quantidadeDisponivel
+        schemas:
+          UpdateQuantitativo:
+          type: object
+          properties:
+             tamanhoMesa:
+               type: string
+               example: "4 cadeiras"
+               maxLength: 255
+             seqRestaurante:
+                type: number
+                format: long
+                example: 5
+             quantidadeDisponivel:
+                type: number
+                format: long
+                example: 5
+             required:
+                - seqRestaurante
+                - tamanhoMesa
+                - quantidadeDisponivel
+          schemas:
+           AvaliacaoRestaurante:
+           type: object
+           properties:
+             comentario:
+               type: string
+               example: "excelente"
+               maxLength: 255
+             documentoCliente:
+                type: string
+                example: "10254212609"
+                maxLength: 255
+             notaAvaliacao:
+                type: number
+                format: long
+                example: 5
+             seqRestaurante:
+                type: number
+                format: long
+                example: 5
+             seqAvaliacao:
+                type: number
+                format: long
+                example: 5
+             dataAvaliacao:
+                 type: date
+                 format: date
+                 example: 15/07/2024
+             required:
+               - comentario
+               - notaAvaliacao
+               - documentoCliente
+               - seqRestaurante
+               - dataAvaliacao
+               - seqAvaliacao
+             schemas:
+                Restaurante:
+                type: object
+                properties:
+                  tipoCozinha:
+                    type: string
+                    example: "italiana"
+                    maxLength: 255
+                  endereco:
+                     type: string
+                     example: "rua x bairro z"
+                     maxLength: 255
+                  nomeRestaurante:
+                       type: string
+                       example: "flor do mar"
+                       maxLength: 255
+                  id:
+                      type: number
+                      format: long
+                      example: 5
+                  required:
+                    - tipoCozinha
+                    - endereco
+                    - nomeRestaurante
+                    - id
+                schemas:
+                    ReservaMesa:
+                      type: object
+                      properties:
+                        nomeCliente:
+                          type: string
+                          example: "excelente"
+                          maxLength: 255
+			
