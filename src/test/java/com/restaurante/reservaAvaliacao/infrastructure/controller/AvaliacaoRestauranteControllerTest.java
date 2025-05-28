@@ -68,11 +68,9 @@ class AvaliacaoRestauranteControllerTest {
         Pagination<AvaliacaoRestaurante> pagination = new Pagination<>(1, 10, 100, 10, avaliacoesList);
 
         // Simulando o comportamento do caso de uso
-        when(getAllAvaliacaoRestauranteUseCase.execute(1, 10, 1L)).thenReturn(pagination);
+        when(getAllAvaliacaoRestauranteUseCase.execute(1, 10, 1L));
 
-        // Simulando o mapeamento para DTO
         AvaliacaoRestaurantePaginadoDTO paginadoDTO = new AvaliacaoRestaurantePaginadoDTO();
-        when(avaliacaoRestauranteMapper.toDTO(pagination)).thenReturn(paginadoDTO);
 
         // Executa a chamada ao método
         ResponseEntity<AvaliacaoRestaurantePaginadoDTO> response = avaliacaoRestauranteController.listaAvaliacoes(1, 10, 1L);

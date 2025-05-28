@@ -19,29 +19,27 @@ public class AvaliacaoRestauranteMapper {
     }
 	  public AvaliacaoRestaurantePaginadoDTO toDTO(final Pagination<GetAllAvaliacaoRestauranteUseCase.Output> pagination) {
 	        final var paginationDTO = 
-	            new PaginationDTO()
-	                .page(pagination.page())
-	                .size(pagination.size())
-	                .total(pagination.total())
-	                .totalPages(pagination.totalPages());
+	            new PaginationDTO(
+	            	pagination.page(),
+	            	pagination.size(),
+	                pagination.total(),
+	                pagination.totalPages());
 
-	        return new AvaliacaoRestaurantePaginadoDTO()
-	            .data(
+	        return new AvaliacaoRestaurantePaginadoDTO(
 	                pagination.items()
 	                .stream()
 	                .map(this::toDTO).toList()
-	            )
-	            .pagination(paginationDTO);
+	            ,paginationDTO);
 	    }
 		
 		public AvaliacaoRestauranteDTO toDTO(final Output output) {
-	        return new AvaliacaoRestauranteDTO()
-	        		.seqAvaliacao(output.seqAvaliacao())
-	                .dataAvaliacao(output.dataAvaliacao())
-	                .notaAvaliacao(output.notaAvaliacao())
-	                .comentario(output.comentario())
-	                .documentoCliente(output.documentoCliente())
-	                .seqRestaurante(output.seqRestaurante())
+	        return new AvaliacaoRestauranteDTO(
+	        		output.seqAvaliacao(),
+	                output.dataAvaliacao(),
+	                output.notaAvaliacao(),
+	                output.comentario(),
+	                output.documentoCliente(),
+	                output.seqRestaurante())
 	                ;
 	    }
 }

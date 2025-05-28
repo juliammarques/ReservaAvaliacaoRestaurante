@@ -39,6 +39,7 @@ public class ReservaMesaEntity {
 	
 
     public enum StatusReserva {
+    	PENDENTE,
         ESPERANDO_CONFIRMACAO,
     	CONFIRMADA,
         ENCERRADA

@@ -13,34 +13,32 @@ import com.restaurante.reservaAvaliacao.domain.pagination.Pagination;
 public class RestauranteMapper {
 
 	 public RestauranteDTO toDTO(final CreateRestauranteUseCase.Output output) {
-	        return new RestauranteDTO().tipoCozinha(output.tipoCozinha())
-	                    .endereco(output.endereco())
-	                    .nomeRestaurante(output.nomeRestaurante())
+	        return new RestauranteDTO(output.tipoCozinha(),
+	                    output.endereco(),
+	                    output.nomeRestaurante())
 	                    ;
 	 }
 	 
 	public RestaurantePaginadoDTO toDTO(final Pagination<GetAllRestauranteUseCase.Output> pagination) {
         final var paginationDTO = 
-            new PaginationDTO()
-                .page(pagination.page())
-                .size(pagination.size())
-                .total(pagination.total())
-                .totalPages(pagination.totalPages());
+        		new PaginationDTO(
+    	            	pagination.page(),
+    	            	pagination.size(),
+    	                pagination.total(),
+    	                pagination.totalPages());
 
-        return new RestaurantePaginadoDTO()
-            .data(
+        return new RestaurantePaginadoDTO(
                 pagination.items()
                 .stream()
                 .map(this::toDTO).toList()
-            )
-            .pagination(paginationDTO);
+            ,paginationDTO);
     }
 	
 	public RestauranteDTO toDTO(final Output output) {
-        return new RestauranteDTO()
-        		.tipoCozinha(output.tipoCozinha())
-                .endereco(output.endereco())
-                .nomeRestaurante(output.nomeRestaurante())
+        return new RestauranteDTO(
+        		output.tipoCozinha(),
+                output.endereco(),
+                output.nomeRestaurante())
                 ;
     }
 	

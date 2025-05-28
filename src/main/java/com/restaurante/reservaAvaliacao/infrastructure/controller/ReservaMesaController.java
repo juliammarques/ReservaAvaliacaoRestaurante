@@ -40,7 +40,7 @@ public class ReservaMesaController {
 	private final ReservaMesaMapper reservaMapper;
 	
 	
-	public ResponseEntity<Void> ReservaMesa(final CreateUpdateReservaMesaDTO reserva){
+	public ResponseEntity<Void> reservaMesa(final CreateUpdateReservaMesaDTO reserva){
 		createReservaMesa.execute(reservaMapper.from(reserva));
 		return ResponseEntity.noContent().build();
 	}

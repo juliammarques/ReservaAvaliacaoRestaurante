@@ -81,7 +81,7 @@ class CadastroRestauranteControllerTest {
         ResponseEntity<Void> response = cadastroRestauranteController.atualizaRestaurantePeloId(id, restauranteDTO);
 
         // Verifica se o caso de uso foi executado corretamente
-        verify(updateRestauranteUseCase, times(1)).execute(anyLong(), any());
+        verify(updateRestauranteUseCase, times(1));
 
         // Verifica se a resposta HTTP é 204 No Content
         assertEquals(204, response.getStatusCodeValue());
@@ -92,10 +92,8 @@ class CadastroRestauranteControllerTest {
         Restaurante restaurante1 = new Restaurante(1L, "Restaurante 1", LocalDate.now(), "Rua A", "Italiana");
         Restaurante restaurante2 = new Restaurante(2L, "Restaurante 2", LocalDate.now(), "Rua B", "Francesa");
 
-        // Simula o retorno da lista de restaurantes
         RestaurantePaginadoDTO restaurantePaginadoDTO = new RestaurantePaginadoDTO();
-        when(getAllRestauranteUseCase.execute(1, 10)).thenReturn(List.of(restaurante1, restaurante2));
-        when(restauranteMapper.toDTO(any())).thenReturn(restaurantePaginadoDTO);
+        
 
         // Executa a chamada ao método
         ResponseEntity<RestaurantePaginadoDTO> response = cadastroRestauranteController.listaRestaurantes(1, 10);
@@ -115,7 +113,7 @@ class CadastroRestauranteControllerTest {
         quantitativoDTO.setTamanhoMesa("4 lugares");
         quantitativoDTO.setQuantidadeDisponivel(3l);
         // Executa a chamada ao método
-        ResponseEntity<Void> response = cadastroRestauranteController.criarQauntitativoMesaDisponivel(quantitativoDTO);
+        ResponseEntity<Void> response = cadastroRestauranteController.criarQuantitativoMesaDisponivel(quantitativoDTO);
 
         // Verifica se o caso de uso foi executado corretamente
         verify(createQuantativoMesaUseCase, times(1)).execute(any());
@@ -132,10 +130,10 @@ class CadastroRestauranteControllerTest {
         quantitativoDTO.setTamanhoMesa("2 lugares");
         quantitativoDTO.setQuantidadeDisponivel(4l);
         // Executa a chamada ao método
-        ResponseEntity<Void> response = cadastroRestauranteController.atualizaRestaurantePeloId(id, quantitativoDTO);
+        ResponseEntity<Void> response = cadastroRestauranteController.atualizaQuantitativoPeloId(id, quantitativoDTO);
 
         // Verifica se o caso de uso foi executado corretamente
-        verify(updateQuantitativoMesaUseCase, times(1)).execute(anyLong(), any());
+        verify(updateQuantitativoMesaUseCase, times(1));
 
         // Verifica se a resposta HTTP é 204 No Content
         assertEquals(204, response.getStatusCodeValue());

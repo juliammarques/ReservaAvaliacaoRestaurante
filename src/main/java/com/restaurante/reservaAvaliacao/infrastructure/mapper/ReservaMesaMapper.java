@@ -34,40 +34,38 @@ public class ReservaMesaMapper {
     
     public ReservaMesaPaginadoDTO toDTO(final Pagination<GetAllReservaMesaUseCase.Output> pagination) {
         final var paginationDTO = 
-            new PaginationDTO()
-                .page(pagination.page())
-                .size(pagination.size())
-                .total(pagination.total())
-                .totalPages(pagination.totalPages());
+        		new PaginationDTO(
+    	            	pagination.page(),
+    	            	pagination.size(),
+    	                pagination.total(),
+    	                pagination.totalPages());
 
-        return new ReservaMesaPaginadoDTO()
-            .data(
+        return new ReservaMesaPaginadoDTO(
                 pagination.items()
                 .stream()
                 .map(this::toDTO).toList()
-            )
-            .pagination(paginationDTO);
+            ,paginationDTO);
     }
 	
 	public ReservaMesaDTO toDTO(final Output output) {
-        return new ReservaMesaDTO()
-        		.seqReservaMesa(output.seqReservaMesa())
-                .dataReserva(output.dataReserva())
-                .seqRestaurante(output.seqRestaurante())
-                .nomeCliente(output.nomeCliente())
-                .documentoCliente(output.documentoCliente())
-                .status(output.status())
+        return new ReservaMesaDTO(
+        		output.seqReservaMesa(),
+                output.dataReserva(),
+                output.seqRestaurante(),
+                output.nomeCliente(),
+                output.documentoCliente(),
+                output.status())
                 ;
     }
 	
 	public ReservaMesaDTO toDTO(final GetReservaMesaByIdUseCase.Output output) {
-        return new ReservaMesaDTO()
-        		.seqReservaMesa(output.seqReservaMesa())
-                .dataReserva(output.dataReserva())
-                .seqRestaurante(output.seqRestaurante())
-                .nomeCliente(output.nomeCliente())
-                .documentoCliente(output.documentoCliente())
-                .status(output.status())
+        return new ReservaMesaDTO(
+        		output.seqReservaMesa(),
+                output.dataReserva(),
+                output.seqRestaurante(),
+                output.nomeCliente(),
+                output.documentoCliente(),
+                output.status())
                 ;
     }
 }
