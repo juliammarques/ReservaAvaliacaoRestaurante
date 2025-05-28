@@ -100,14 +100,12 @@
 							<language>spring</language>
 							<generateSupportingFiles>false</generateSupportingFiles>
 							<apiPackage>com.restaurante.reservaAvaliacao.api.controller</apiPackage>
-							<modelPackage>com.restaurante.reservaAvaliacao.application.dto</modelPackage>
 							<typeMappings>
 								<typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
 							</typeMappings>
 							<importMappings>
 								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
 							</importMappings>
-							<modelNameSuffix>DTO</modelNameSuffix>
 							<configOptions>
 								<interfaceOnly>true</interfaceOnly>
 								<jakarta>true</jakarta>
